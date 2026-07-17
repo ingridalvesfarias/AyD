@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alyne &amp; Douglas — 12 de Setembro de 2026</title>
+  <meta name="description"
+    content="Site do casamento de Alyne e Douglas. Confirme presença, conheça a história do casal e veja todos os detalhes da celebração.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="favicon" href="assets/favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="bg-monogram" aria-hidden="true">A&amp;D</div>
+
+  <!-- ===== NAV ===== -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="#home" class="brand">A<span class="brand-amp">&amp;</span>D</a>
+
+      <div class="header-right">
+        <nav class="main-nav" id="mainNav">
+          <a href="#home" class="nav-link">Início</a>
+          <a href="#casal" class="nav-link">O Casal</a>
+          <a href="#padrinhos" class="nav-link">Padrinhos</a>
+          <a href="#recepcao" class="nav-link">Recepção</a>
+          <a href="#presentes" class="nav-link">Presentes</a>
+          <a href="#rsvp" class="nav-link nav-cta">Confirmar Presença</a>
+          <a href="#recados" class="nav-link">Recados</a>
+        </nav>
+
+        <button id="themeToggle" class="theme-toggle-btn" aria-label="Alternar modo de cor">
+          <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-width="2" style="display: none;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+      <div class="hero-frame" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow reveal">Nós vamos casar</p>
+        <h1 class="hero-names reveal">
+          <span class="name">Alyne</span>
+          <span class="hero-amp">&amp;</span>
+          <span class="name">Douglas</span>
+        </h1>
+        <div class="divider reveal">
+          <svg viewBox="0 0 240 24" class="flourish">
+            <use href="#flourish-svg" />
+          </svg>
+        </div>
+        <p class="hero-date reveal">12 de Setembro de 2026 &middot; Fortaleza, CE</p>
+
+        <!-- Contagem regressiva em tempo real -->
+        <div class="countdown-container reveal" id="countdown" aria-live="polite">
+          <div class="countdown-circle">
+            <span class="countdown-val" id="cd-days">00</span>
+            <span class="countdown-lbl">Dias</span>
+          </div>
+          <div class="countdown-circle">
+            <span class="countdown-val" id="cd-hours">00</span>
+            <span class="countdown-lbl">Horas</span>
+          </div>
+          <div class="countdown-circle">
+            <span class="countdown-val" id="cd-minutes">00</span>
+            <span class="countdown-lbl">Minutos</span>
+          </div>
+          <div class="countdown-circle">
+            <span class="countdown-val" id="cd-seconds">00</span>
+            <span class="countdown-lbl">Segundos</span>
+          </div>
+        </div>
+      </div>
+      <a href="#casal" class="scroll-cue" aria-label="Rolar para o conteúdo">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ===== O CASAL ===== -->
+    <section class="section" id="casal">
+      <div class="container">
+        <p class="eyebrow reveal center">A História</p>
+        <h2 class="section-title reveal center">O Casal</h2>
+        <div class="section-divider reveal">
+          <svg viewBox="0 0 240 24" class="flourish">
+            <use href="#flourish-svg" />
+          </svg>
+        </div>
+
+        <div class="couple-grid">
+          <figure class="portrait reveal">
+            <div class="portrait-frame">
+              <div class="portrait-placeholder">
+                <span> <img src="assets/alyne.jpg" alt="Foto da noiva"></span>
+              </div>
+            </div>
+            <figcaption>Alyne Pilger</figcaption>
+          </figure>
+
+          <div class="couple-story reveal">
+            <p>Sejam muito bem-vindos ao nosso casamento.</p>
+            <p>É uma alegria imensa compartilhar este momento tão especial com vocês. Cada pessoa presente faz parte da
+              nossa história e, de alguma forma, contribuiu para que chegássemos até aqui.</p>
+            <p>Este dia representa o início de um novo capítulo, construído com amor, respeito, cumplicidade e muitos
+              sonhos. Criamos este espaço com carinho para compartilhar tudo sobre o grande dia.</p>
+            <p class="signature">Com carinho,<br>Alyne &amp; Douglas</p>
+          </div>
+
+          <figure class="portrait reveal">
+            <div class="portrait-frame">
+              <div class="portrait-placeholder">
+                <span> <img src="assets/douglas.jpg" alt="Foto do noivo"></span>
+              </div>
+            </div>
+            <figcaption>Douglas Holanda</figcaption>
+          </figure>
+        </div>
+
+        <blockquote class="verse reveal">
+          <p>"O amor tudo sofre, tudo crê, tudo espera, tudo suporta. O amor jamais acaba."</p>
+          <cite>1 Coríntios 13:7-8</cite>
+        </blockquote>
+
+        <div class="dress-code reveal">
+          <h3>Traje</h3>
+          <div class="dress-grid">
+            <div class="dress-card">
+              <div class="dress-photo">
+                <img src="assets/traje-feminino.jpg" alt="Sugestão de looks femininos">
+              </div>
+              <h4>Looks femininos</h4>
+              <p>Vestidos longos ou midi, em tons suaves — fiquem à vontade para elegância e conforto.</p>
+            </div>
+            <div class="dress-card">
+              <div class="dress-photo">
+                <img src="assets/traje-masculino.jpg" alt="Sugestão de trajes masculinos">
+              </div>
+              <h4>Trajes masculinos</h4>
+              <p>Terno ou blusa social — a formalidade é bem-vinda, sem excesso de rigor.</p>
+            </div>
+            <div class="dress-card dress-card--dont">
+              <div class="dress-photo">
+                <img src="assets/nao-usar.jpeg" alt="Trajes a evitar">
+              </div>
+              <h4>O que evitar</h4>
+              <p>Pedimos, com carinho, que branco, tons de bege e preto não sejam usados. As demais cores estão
+                liberadas!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PADRINHOS ===== -->
+    <section class="section section--tint" id="padrinhos">
+      <div class="container">
+        <p class="eyebrow reveal center">Ao Nosso Lado</p>
+        <h2 class="section-title reveal center">Padrinhos</h2>
+        <div class="section-divider reveal">
+          <svg viewBox="0 0 240 24" class="flourish">
+            <use href="#flourish-svg" />
+          </svg>
+        </div>
+        <p class="section-intro reveal center">É uma emoção única tê-los ao nosso lado e poder partilhar com vocês toda
+          a felicidade desta nova etapa. Desejamos tê-los como testemunhas do nosso amor.</p>
+
+        <div class="godparents-grid" id="godparentsGrid">
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RECEPÇÃO ===== -->
+    <section class="section" id="recepcao">
+      <div class="container">
+        <p class="eyebrow reveal center">O Grande Dia</p>
+        <h2 class="section-title reveal center">Recepção</h2>
+        <div class="section-divider reveal">
+          <svg viewBox="0 0 240 24" class="flourish">
+            <use href="#flourish-svg" />
+          </svg>
+        </div>
+
+        <div class="venue-card reveal">
+          <div class="venue-info">
+            <p class="venue-tag">Cerimônia &amp; Festa no mesmo local</p>
+            <h3>Buffet Ana Conceito</h3>
+            <p class="venue-address">Rua Tereza Cristina, 1976 — Benfica, Fortaleza – CE</p>
+            <div class="venue-time">
+              <span class="venue-time-value">20h</span>
+              <span class="venue-time-label">Chegue um pouco antes — quem se antecipa, aproveita mais.</span>
+            </div>
+            <a class="btn btn--outline"
+              href="https://www.google.com/maps/search/?api=1&query=Rua+Tereza+Cristina,+1976,+Benfica,+Fortaleza+CE"
+              target="_blank" rel="noopener">Ver no mapa</a>
+          </div>
+          <div class="venue-map">
+            <iframe title="Localização do Buffet Ana Conceito"
+              src="https://www.google.com/maps?q=Rua+Tereza+Cristina,+1976,+Benfica,+Fortaleza+CE&output=embed"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+
+        <!-- ===== DICAS DE BELEZA ===== -->
+        <div class="beauty-tips reveal">
+          <h3>Dicas de Beleza</h3>
+          <p class="beauty-intro">Para ajudar nossos convidados a se prepararem para o grande dia, separamos algumas
+            indicações de espaços de beleza parceiros:</p>
+          <div class="beauty-grid">
+            <div class="beauty-card">
+              <div class="beauty-avatar-wrapper">
+                <div class="beauty-avatar">
+                  <img src="assets/labella.jpeg" alt="La Bella Estética e beleza">
+                </div>
+              </div>
+              <div class="beauty-info">
+                <h4>La Bella Estética e Beleza</h4>
+                <p>Excelente opção para quem mora próximo à Praia do Futuro.</p>
+                <a href="https://www.instagram.com/labellaesteticaebeleza" target="_blank" rel="noopener"
+                  class="instagram-link">
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round" class="instagram-icon">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  @labellaesteticaebeleza
+                </a>
+              </div>
+            </div>
+            <div class="beauty-card">
+              <div class="beauty-avatar-wrapper">
+                <div class="beauty-avatar">
+                  <img src="assets/beatriz-estudio.jpeg" alt="Beatriz Pilger Beauty Studio">
+                </div>
+              </div>
+              <div class="beauty-info">
+                <h4>Beatriz Pilger Beauty Studio</h4>
+                <p>Excelente opção para quem mora próximo ao Mondubim!</p>
+                <a href="https://www.instagram.com/bystudiobp" target="_blank" rel="noopener" class="instagram-link">
+                  <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none"
+                    stroke-linecap="round" stroke-linejoin="round" class="instagram-icon">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                  </svg>
+                  @bystudiobp
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRESENTES ===== -->
+    <section class="section section--tint" id="presentes">
+      <div class="container">
+        <p class="eyebrow reveal center">Com Carinho</p>
+        <h2 class="section-title reveal center">Lista de Presentes</h2>
+        <div class="section-divider reveal">
+          <svg viewBox="0 0 240 24" class="flourish">
+            <use href="#flourish-svg" />
+          </svg>
+        </div>
+        <p class="section-intro reveal center">A presença de vocês já é o maior presente. Mas, se desejarem nos ajudar a
+          construir esse novo lar, preparamos esta pequena lista com carinho.</p>
+
+        <div class="gift-grid reveal" id="giftsGrid">
+        
+        </div>
+        <p class="gift-note reveal center">Clique em "Presentear" para adicionar ao carrinho — você pode escolher
+          quantos presentes quiser e finalizar tudo de uma vez. 💛</p>
+      </div>
+    </section>
+
+    <!-- ===== RSVP ===== -->
+    <section class="section" id="rsvp">
+      <div class="container container--narrow">
+        <p class="eyebrow reveal center">Sua Presença</p>
+        <h2 class="section-title reveal center">Confirme Sua Presença</h2>
+        <div class="section-divider reveal">
+          <svg viewBox="0 0 240 24" class="flourish">
+            <use href="#flourish-svg" />
+          </svg>
+        </div>
+        <p class="section-intro reveal center">Pedimos, com carinho, a confirmação até <strong>25 de agosto de
+            2026</strong>.</p>
+
+        <form class="rsvp-form reveal" id="rsvpForm">
+          <div class="form-row">
+            <label for="rsvpName">Nome completo</label>
+            <input type="text" id="rsvpName" name="name" required placeholder="Seu nome">
+          </div>
+
+          <div class="form-row form-row--split">
+            <div>
+              <label for="rsvpGoing">Você irá ao evento?</label>
+              <select id="rsvpGoing" name="going" required>
+                <option value="">Selecione</option>
+                <option value="sim">Sim, estarei lá</option>
+                <option value="nao">Não poderei ir</option>
+              </select>
+            </div>
+            <div>
+              <label for="rsvpAdults">Nº de adultos (com você)</label>
+              <input type="number" id="rsvpAdults" name="adults" min="1" value="1">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="rsvpEmail">E-mail</label>
+            <input type="email" id="rsvpEmail" name="email" required placeholder="seu@email.com">
+          </div>
+
+          <div class="form-row">
+            <label for="rsvpMsg">Observações (opcional)</label>
+            <textarea id="rsvpMsg" name="message" rows="3"
+              placeholder="Alguma restrição alimentar, dúvida, etc."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn--gold">Enviar confirmação</button>
+          <p class="form-feedback" id="rsvpFeedback" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== RECADOS ===== -->
+    <section class="section section--tint" id="recados">
+      <div class="container container--narrow">
+        <p class="eyebrow reveal center">Mural de Carinho</p>
+        <h2 class="section-title reveal center">Deixe seu Recado</h2>
+        <div class="section-divider reveal">
+          <svg viewBox="0 0 240 24" class="flourish">
+            <use href="#flourish-svg" />
+          </svg>
+        </div>
+
+        <form class="recado-form reveal" id="recadoForm">
+          <div class="form-row form-row--split">
+            <div>
+              <label for="recadoNome">Seu nome</label>
+              <input type="text" id="recadoNome" required placeholder="Seu nome">
+            </div>
+            <div>
+              <label for="recadoEmail">E-mail</label>
+              <input type="email" id="recadoEmail" required placeholder="seu@email.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="recadoTexto">Mensagem</label>
+            <textarea id="recadoTexto" rows="3" required
+              placeholder="Escreva uma mensagem de carinho para o casal"></textarea>
+          </div>
+          <button type="submit" class="btn btn--gold">Enviar recado</button>
+        </form>
+
+        <ul class="recados-list" id="recadosList">
+          <li class="recado-item">
+            <p class="recado-texto">"Que o amor sempre se faça presente e a felicidade seja eterna."</p>
+            <p class="recado-autor">— Elisangela Gomes Dias</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-monogram">A<span class="brand-amp">&amp;</span>D</p>
+    <p>Alyne &amp; Douglas &middot; 12 de Setembro de 2026 &middot; Fortaleza, CE</p>
+    <p class="footer-credit">Site desenvolvido por <a href="https://ingridfarias.vercel.app/" target="_blank"
+        rel="noopener">INDI.dev</a></p>
+  </footer>
+
+  <!-- SVG floreio reutilizado como divisor -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="flourish-svg" viewBox="0 0 240 24">
+      <path d="M0 12 H90" stroke="currentColor" stroke-width="1" />
+      <path d="M150 12 H240" stroke="currentColor" stroke-width="1" />
+      <path
+        d="M120 12 c-6 -10 -22 -10 -28 0 c-4 7 2 14 8 10 c4 -3 2 -9 -4 -8 M120 12 c6 -10 22 -10 28 0 c4 7 -2 14 -8 10 c-4 -3 -2 -9 4 -8"
+        fill="none" stroke="currentColor" stroke-width="1" />
+      <circle cx="120" cy="12" r="2.5" fill="currentColor" />
+      <path d="M100 12 H90 M140 12 H150" stroke="currentColor" stroke-width="1" />
+    </symbol>
+  </svg>
+
+  <!-- ===== BOTÃO FLUTUANTE DO CARRINHO DE PRESENTES ===== -->
+  <button id="cartFab" class="cart-fab" aria-label="Ver carrinho de presentes" type="button">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="9" cy="21" r="1"></circle>
+      <circle cx="19" cy="21" r="1"></circle>
+      <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+    </svg>
+    <span class="cart-fab-badge" id="cartBadge">0</span>
+  </button>
+
+  <!-- ===== MODAL: CARRINHO ===== -->
+  <div class="modal-overlay" id="cartModalOverlay">
+    <div class="modal cart-modal" role="dialog" aria-modal="true" aria-labelledby="cartModalTitle">
+      <button class="modal-close" type="button" aria-label="Fechar">&times;</button>
+      <h3 id="cartModalTitle">Seu Carrinho de Presentes</h3>
+      <div class="cart-items" id="cartItemsList"></div>
+      <div class="cart-total-row">
+        <span>Total</span>
+        <span id="cartTotalValue">R$ 0,00</span>
+      </div>
+      <button class="btn btn--gold" type="button" id="goToCheckoutBtn">Finalizar Presente</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: CHECKOUT (PIX / CARTÃO) ===== -->
+  <div class="modal-overlay" id="checkoutModalOverlay">
+    <div class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
+      <button class="modal-close" type="button" aria-label="Fechar">&times;</button>
+      <h3 id="checkoutModalTitle">Finalizar Presente</h3>
+      <p class="checkout-total">Valor total: <strong id="checkoutTotalValue">R$ 0,00</strong></p>
+
+      <div class="payment-methods">
+        <button class="payment-method-btn active" type="button" id="btnPagPix">Pix</button>
+        <button class="payment-method-btn" type="button" id="btnPagCartao">Cartão de Crédito</button>
+      </div>
+
+      <div class="payment-panel" id="panelPix">
+        <p>Copie a chave Pix abaixo e envie o valor de <strong id="pixTotalValue">R$ 0,00</strong>:</p>
+        <div class="pix-key-box">
+          <div class="pix-key-info">
+            <span class="pix-key-label">Chave Pix (CPF)</span>
+            <span class="pix-key-value" id="pixKeyText">chave-pix</span>
+          </div>
+          <button class="btn-copy-pix" type="button" id="copyPixBtn">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span>Copiar</span>
+          </button>
+        </div>
+        <button class="btn btn--gold" type="button" id="sendPixWhats">Enviar comprovante pelo WhatsApp</button>
+      </div>
+
+      <div class="payment-panel" id="panelCartao" style="display:none;">
+        <label for="parcelasSelect">Em quantas vezes deseja parcelar?</label>
+        <select id="parcelasSelect">
+          <option value="1">1x sem juros</option>
+          <option value="2">2x sem juros</option>
+          <option value="3">3x sem juros</option>
+        </select>
+        <p class="parcela-preview" id="parcelaPreview"></p>
+        <button class="btn btn--gold" type="button" id="sendCartaoWhats">Solicitar link de pagamento pelo
+          WhatsApp</button>
+      </div>
+
+      <p class="checkout-note">Assim que enviarmos, retornaremos com o link de pagamento pelo WhatsApp. 💛</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
