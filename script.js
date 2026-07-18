@@ -106,6 +106,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ============ REVEAL ON SCROLL ============ */
   const revealEls = document.querySelectorAll('.reveal');
+  if (window.innerWidth <= 900) {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
   const revealObserver = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {

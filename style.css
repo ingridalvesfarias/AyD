@@ -1211,6 +1211,11 @@ textarea:focus {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   .couple-grid {
     grid-template-columns: 1fr;
   }
