@@ -39,11 +39,11 @@ body.dark-theme {
   --gold: #d8b978;
   --gold-light: #f1ead9;
   --wine: #d8b978;
-  --line: #221d17;
-  --text-muted: #8c8273;
+  --line: #383129;
+  --text-muted: #a49987;
 
-  --card-bg: #0c0c0b;
-  --card-border: #221d17;
+  --card-bg: #181512;
+  --card-border: #383129;
   --input-bg: #121211;
   --placeholder-start: #1b1815;
   --placeholder-end: #0f0d0b;
