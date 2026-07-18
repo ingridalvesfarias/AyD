@@ -10,7 +10,7 @@ const PIX_NAME = 'Alyne Pilger';
 
 // InfinitTag da InfinitePay
 const INFINITE_TAG = 'labellaesteticaebeleza';
-/* ============================================================ */
+/* =========================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
 
