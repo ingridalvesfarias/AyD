@@ -170,11 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'Evandra e Eduardo!', role: 'Avós paternos do Noivo!', image: 'assets/evandra&eduardo.jpg' }
   ];
   const grid = document.getElementById('godparentsGrid');
-  if (grid) {
+  if (grid && grid.children.length === 0) {
     grid.innerHTML = godparents.map(g => `
       <div class="godparent-card">
         <div class="godparent-photo">
-          ${g.image ? `<img src="${g.image}" alt="${g.name}" loading="lazy">` : '❦'}
+          ${g.image ? `<img src="${g.image}" alt="${g.name}">` : '❦'}
         </div>
         <h4>${g.name}</h4>
         <p>${g.role}</p>
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const giftsGrid = document.getElementById('giftsGrid');
-  if (giftsGrid) {
+  if (giftsGrid && giftsGrid.children.length === 0) {
     giftsGrid.innerHTML = gifts.map((g, idx) => {
       let priceHTML = '';
       if (g.price.includes('ou')) {
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return `
         <article class="gift-card">
           <div class="gift-image">
-            <img src="${g.image}" alt="${g.title}" loading="lazy">
+            <img src="${g.image}" alt="${g.title}">
           </div>
           <h4>${g.title}</h4>
           <p class="gift-price">${priceHTML}</p>
