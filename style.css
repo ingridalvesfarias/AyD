@@ -981,9 +981,6 @@ body.dark-theme .theme-toggle-btn:hover {
   gap: 24px;
   opacity: 1;
   visibility: visible;
-  /* Garante que todos os cards da mesma fileira tenham a mesma altura,
-     independentemente do tamanho do título ou se o presente tem preço
-     parcelado ou não. */
   align-items: stretch;
 }
 
@@ -997,10 +994,6 @@ body.dark-theme .theme-toggle-btn:hover {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
   opacity: 1;
   visibility: visible;
-  /* Cards viram coluna flexível: mesmo com títulos de tamanhos diferentes
-     (2 ou 3 linhas) e nem todo item tendo preço parcelado, o botão
-     "Presentear" sempre fica alinhado na base do card, e todos os cards
-     da mesma fileira ficam com a mesma altura (sem ficar "torto"). */
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -1024,9 +1017,6 @@ body.dark-theme .theme-toggle-btn:hover {
   flex-shrink: 0;
 }
 
-/* Empurra o botão "Presentear" para a base do card, alinhando-o com os
-   demais cards da mesma fileira mesmo quando o título ou o preço ocupam
-   alturas diferentes. */
 .gift-card .btn-presentear {
   margin-top: auto;
 }

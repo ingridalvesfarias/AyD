@@ -1,8 +1,7 @@
 /* ============================================================
                   CONFIGURAÇÕES — EDITE AQUI
    ============================================================ */
-// Número de WhatsApp que vai receber as confirmações de presença e recados.
-// Formato: código do país (55) + DDD + número, SOMENTE dígitos.
+
 const WHATSAPP_NUMBER = '5585999026005';
 
 // Chave Pix que será exibida como alternativa no modal.
@@ -389,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ============================================================
-     MODAL DE FORMAS DE PAGAMENTO (INFINITEPAY + CHAVE PIX)
+        MODAL DE FORMAS DE PAGAMENTO (INFINITEPAY + CHAVE PIX)
      ============================================================ */
   const goToCheckoutBtn = document.getElementById('goToCheckoutBtn');
   const checkoutModalOverlay = document.getElementById('checkoutModalOverlay');
