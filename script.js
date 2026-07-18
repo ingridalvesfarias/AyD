@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = document.getElementById('godparentsGrid');
   if (grid) {
     grid.innerHTML = godparents.map(g => `
-      <div class="godparent-card reveal is-visible">
+      <div class="godparent-card">
         <div class="godparent-photo">
           ${g.image ? `<img src="${g.image}" alt="${g.name}" loading="lazy">` : '❦'}
         </div>
@@ -240,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       return `
-        <article class="gift-card reveal is-visible">
+        <article class="gift-card">
           <div class="gift-image">
             <img src="${g.image}" alt="${g.title}" loading="lazy">
           </div>
