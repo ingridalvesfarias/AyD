@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -437,20 +436,22 @@
         <span>Total</span>
         <span id="cartTotalValue">R$ 0,00</span>
       </div>
-      <button class="btn btn--gold" type="button" id="goToCheckoutBtn">Finalizar Presente</button>
+      <button class="btn btn--gold" type="button" id="goToCheckoutBtn">Finalizar Presente (InfinitePay)</button>
     </div>
   </div>
 
-  <!-- ===== MODAL: CHECKOUT (PIX / CARTÃO) ===== -->
+  <!-- ===== MODAL: CHECKOUT OPCIONAL (PIX / CARTÃO) ===== -->
   <div class="modal-overlay" id="checkoutModalOverlay">
     <div class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
       <button class="modal-close" type="button" aria-label="Fechar">&times;</button>
       <h3 id="checkoutModalTitle">Finalizar Presente</h3>
       <p class="checkout-total">Valor total: <strong id="checkoutTotalValue">R$ 0,00</strong></p>
 
+      <button class="btn btn--gold" type="button" id="startInfiniteCheckoutBtn" style="margin-bottom: 1rem; width: 100%;">Pagar via InfinitePay (Pix / Cartão)</button>
+
       <div class="payment-methods">
-        <button class="payment-method-btn active" type="button" id="btnPagPix">Pix</button>
-        <button class="payment-method-btn" type="button" id="btnPagCartao">Cartão de Crédito</button>
+        <button class="payment-method-btn active" type="button" id="btnPagPix">Chave Pix Direta</button>
+        <button class="payment-method-btn" type="button" id="btnPagCartao">Simular Cartão</button>
       </div>
 
       <div class="payment-panel" id="panelPix">
@@ -469,7 +470,6 @@
             <span>Copiar</span>
           </button>
         </div>
-        <button class="btn btn--gold" type="button" id="sendPixWhats">Enviar comprovante pelo WhatsApp</button>
       </div>
 
       <div class="payment-panel" id="panelCartao" style="display:none;">
@@ -480,11 +480,9 @@
           <option value="3">3x sem juros</option>
         </select>
         <p class="parcela-preview" id="parcelaPreview"></p>
-        <button class="btn btn--gold" type="button" id="sendCartaoWhats">Solicitar link de pagamento pelo
-          WhatsApp</button>
       </div>
 
-      <p class="checkout-note">Assim que enviarmos, retornaremos com o link de pagamento pelo WhatsApp. 💛</p>
+      <p class="checkout-note">O valor arrecadado vai diretamente para a conta dos noivos. 💛</p>
     </div>
   </div>
 

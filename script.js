@@ -1,18 +1,33 @@
 /* ============================================================
-                  CONFIGURAÇÕES — EDITE AQUI
+                   CONFIGURAÇÕES — EDITE AQUI
    ============================================================ */
-// Número de WhatsApp que vai receber as confirmações de presença,
-// os pedidos de presente e as solicitações de link de pagamento.
+// Número de WhatsApp que vai receber as confirmações de presença e recados.
 // Formato: código do país (55) + DDD + número, SOMENTE dígitos.
-// Exemplo Fortaleza-CE: '5585999998888'
 const WHATSAPP_NUMBER = '5585999026005';
 
-// Chave Pix que será exibida na hora de presentear.
+// Chave Pix que será exibida como alternativa no modal (se necessário).
 const PIX_KEY = '08064082358';
 const PIX_NAME = 'Alyne Pilger';
+
+// InfinitTag da InfinitePay
+const INFINITE_TAG = 'labellaesteticaebeleza';
 /* ============================================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  /* ============ NOTIFICAÇÃO DE RETORNO DO CHECKOUT ============ */
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('status') === 'success') {
+    // Limpa o carrinho após pagamento concluído com sucesso
+    localStorage.removeItem('wedding_gift_cart');
+    
+    // Notificação amigável de agradecimento
+    setTimeout(() => {
+      alert('🎁 Agradecemos imensamente o seu presente! Sua generosidade traz ainda mais alegria ao nosso grande dia. 💛');
+      // Limpa a query string da URL sem recarregar a página
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }, 500);
+  }
 
   /* ============ TEMA CLARO / ESCURO ============ */
   const themeToggle = document.getElementById('themeToggle');
@@ -23,23 +38,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
       document.body.classList.add('dark-theme');
-      sunIcon.style.display = 'none';
-      moonIcon.style.display = 'block';
+      if (sunIcon) sunIcon.style.display = 'none';
+      if (moonIcon) moonIcon.style.display = 'block';
     } else {
       document.body.classList.remove('dark-theme');
-      sunIcon.style.display = 'block';
-      moonIcon.style.display = 'none';
+      if (sunIcon) sunIcon.style.display = 'block';
+      if (moonIcon) moonIcon.style.display = 'none';
     }
 
     themeToggle.addEventListener('click', () => {
       const isDark = document.body.classList.toggle('dark-theme');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      if (isDark) {
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-      } else {
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
+      if (sunIcon && moonIcon) {
+        if (isDark) {
+          sunIcon.style.display = 'none';
+          moonIcon.style.display = 'block';
+        } else {
+          sunIcon.style.display = 'block';
+          moonIcon.style.display = 'none';
+        }
       }
     });
   }
@@ -47,7 +64,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ============ HEADER SCROLL STATE ============ */
   const header = document.getElementById('siteHeader');
   const onScroll = () => {
-    header.classList.toggle('scrolled', window.scrollY > 40);
+    if (header) {
+      header.classList.toggle('scrolled', window.scrollY > 40);
+    }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
@@ -55,18 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ============ MENU MOBILE ============ */
   const navToggle = document.getElementById('navToggle');
   const mainNav = document.getElementById('mainNav');
-  navToggle.addEventListener('click', () => {
-    const isOpen = mainNav.classList.toggle('open');
-    navToggle.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-  });
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      mainNav.classList.remove('open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', 'false');
+  if (navToggle && mainNav) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', String(isOpen));
     });
-  });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        navToggle.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
   /* ============ SCROLL SPY ============ */
   const sections = document.querySelectorAll('main section[id]');
@@ -127,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  /* ============ PADRINHOS (dados fáceis de editar) ============ */
+  /* ============ PADRINHOS ============ */
   const godparents = [
     { name: 'Beatriz Pilger e Lucas Lemos', role: 'Irmã e cunhado da noiva! Além de irmã, melhor amiga! Lucas além de cunhado é considerado irmão!', image: 'assets/beatriz&lucas.jpg' },
     { name: 'Isabele Rocha e Lucas Araujo', role: 'Amigos dos noivos.', image: 'assets/isabele&lucas.jpg' },
@@ -161,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `).join('');
   }
 
-  /* ============ LISTA DE PRESENTES MEME ============ */
+  /* ============ LISTA DE PRESENTES SIMBÓLICA ============ */
   const gifts = [
     { title: '1 Ano de café para noiva que é viciada', price: 'R$ 262,07', image: 'img/café.jpg' },
     { title: '1 ano de saco de pão para o noivo', price: 'R$ 198,90', image: 'img/pão.jpg' },
@@ -238,7 +259,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const cartModalOverlay = document.getElementById('cartModalOverlay');
   const cartItemsList = document.getElementById('cartItemsList');
   const cartTotalValue = document.getElementById('cartTotalValue');
-  const checkoutModalOverlay = document.getElementById('checkoutModalOverlay');
 
   function loadCart() {
     try {
@@ -368,8 +388,79 @@ document.addEventListener('DOMContentLoaded', () => {
     cartFab.addEventListener('click', () => openModal(cartModalOverlay));
   }
 
-  /* ===== Checkout: Pix ou Cartão ===== */
+  /* ============================================================
+     FLUXO DE CHECKOUT INTEGRADO VIA INFINITEPAY
+     ============================================================ */
   const goToCheckoutBtn = document.getElementById('goToCheckoutBtn');
+  const startInfiniteCheckoutBtn = document.getElementById('startInfiniteCheckoutBtn');
+
+  /**
+   * Envia o carrinho para a Serverless Function /api/checkout
+   * e redireciona o convidado diretamente para a URL da InfinitePay.
+   */
+  async function executeInfiniteCheckout(triggerBtn) {
+    const cart = loadCart();
+    if (cart.length === 0) {
+      alert('Seu carrinho está vazio. Escolha um presente antes de finalizar. 💛');
+      return;
+    }
+
+    const btn = triggerBtn || goToCheckoutBtn;
+    const originalText = btn ? btn.textContent : 'Finalizar Presente';
+
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Gerando pagamento no InfinitePay...';
+    }
+
+    const fallbackDirectUrl = `https://pay.infinitepay.io/${INFINITE_TAG}`;
+
+    try {
+      // Requisição para a Vercel Serverless Function
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ items: cart })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success && data.url) {
+          window.location.href = data.url;
+          return;
+        }
+      }
+
+      console.warn('Backend serverless não retornou URL. Redirecionando para a página oficial do InfiniteTag...');
+      window.location.href = fallbackDirectUrl;
+
+    } catch (error) {
+      console.warn('Erro ao conectar com /api/checkout. Usando fallback direto:', error);
+      window.location.href = fallbackDirectUrl;
+    }
+  }
+
+  // Ao clicar em "Finalizar Presente" no carrinho, dispara a integração com InfinitePay
+  if (goToCheckoutBtn) {
+    goToCheckoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      executeInfiniteCheckout(goToCheckoutBtn);
+    });
+  }
+
+  if (startInfiniteCheckoutBtn) {
+    startInfiniteCheckoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      executeInfiniteCheckout(startInfiniteCheckoutBtn);
+    });
+  }
+
+  /* ============================================================
+     MODAL DE SUPORTE A CHAVE PIX DIRETA (OPCIONAL)
+     ============================================================ */
+  const checkoutModalOverlay = document.getElementById('checkoutModalOverlay');
   const checkoutTotalValue = document.getElementById('checkoutTotalValue');
   const pixTotalValue = document.getElementById('pixTotalValue');
   const pixKeyText = document.getElementById('pixKeyText');
@@ -380,14 +471,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const panelCartao = document.getElementById('panelCartao');
   const parcelasSelect = document.getElementById('parcelasSelect');
   const parcelaPreview = document.getElementById('parcelaPreview');
-  const sendPixWhats = document.getElementById('sendPixWhats');
-  const sendCartaoWhats = document.getElementById('sendCartaoWhats');
 
   if (pixKeyText) pixKeyText.textContent = PIX_KEY;
-
-  function buildCartSummaryLines(cart) {
-    return cart.map(i => `• ${i.title} (x${i.qty}) — ${formatBRL(i.value * i.qty)}`);
-  }
 
   function updateParcelaPreview() {
     if (!parcelasSelect || !parcelaPreview) return;
@@ -401,31 +486,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  if (goToCheckoutBtn) {
-    goToCheckoutBtn.addEventListener('click', () => {
-      const cart = loadCart();
-      if (cart.length === 0) return;
-      const total = cartTotal(cart);
-      if (checkoutTotalValue) checkoutTotalValue.textContent = formatBRL(total);
-      if (pixTotalValue) pixTotalValue.textContent = formatBRL(total);
-      updateParcelaPreview();
-      closeModal(cartModalOverlay);
-      openModal(checkoutModalOverlay);
-    });
-  }
-
   if (btnPagPix && btnPagCartao) {
     btnPagPix.addEventListener('click', () => {
       btnPagPix.classList.add('active');
       btnPagCartao.classList.remove('active');
-      panelPix.style.display = '';
-      panelCartao.style.display = 'none';
+      if (panelPix) panelPix.style.display = '';
+      if (panelCartao) panelCartao.style.display = 'none';
     });
     btnPagCartao.addEventListener('click', () => {
       btnPagCartao.classList.add('active');
       btnPagPix.classList.remove('active');
-      panelCartao.style.display = '';
-      panelPix.style.display = 'none';
+      if (panelCartao) panelCartao.style.display = '';
+      if (panelPix) panelPix.style.display = 'none';
       updateParcelaPreview();
     });
   }
@@ -439,56 +511,18 @@ document.addEventListener('DOMContentLoaded', () => {
     copyPixBtn.addEventListener('click', async () => {
       try {
         await navigator.clipboard.writeText(PIX_KEY);
-        const original = copyPixLabel.textContent;
-        copyPixLabel.textContent = 'Copiado!';
-        copyPixBtn.classList.add('copied');
-        setTimeout(() => {
-          copyPixLabel.textContent = original;
-          copyPixBtn.classList.remove('copied');
-        }, 1800);
+        if (copyPixLabel) {
+          const original = copyPixLabel.textContent;
+          copyPixLabel.textContent = 'Copiado!';
+          copyPixBtn.classList.add('copied');
+          setTimeout(() => {
+            copyPixLabel.textContent = original;
+            copyPixBtn.classList.remove('copied');
+          }, 1800);
+        }
       } catch {
         window.prompt('Copie a chave Pix abaixo:', PIX_KEY);
       }
-    });
-  }
-
-  if (sendPixWhats) {
-    sendPixWhats.addEventListener('click', () => {
-      const cart = loadCart();
-      if (cart.length === 0) return;
-      const linhas = [
-        '🎁 *Presente via Pix — Alyne & Douglas*',
-        '',
-        ...buildCartSummaryLines(cart),
-        '',
-        `*Total:* ${formatBRL(cartTotal(cart))}`,
-        `*Chave Pix usada:* ${PIX_KEY}`,
-        '',
-        'Já fiz o Pix, segue o comprovante! 💛'
-      ];
-      const texto = encodeURIComponent(linhas.join('\n'));
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${texto}`, '_blank', 'noopener');
-    });
-  }
-
-  if (sendCartaoWhats) {
-    sendCartaoWhats.addEventListener('click', () => {
-      const cart = loadCart();
-      if (cart.length === 0) return;
-      const n = parseInt(parcelasSelect.value, 10);
-      const total = cartTotal(cart);
-      const linhas = [
-        '🎁 *Presente via Cartão de Crédito — Alyne & Douglas*',
-        '',
-        ...buildCartSummaryLines(cart),
-        '',
-        `*Total:* ${formatBRL(total)}`,
-        `*Parcelamento desejado:* ${n}x${n > 1 ? ' de ' + formatBRL(total / n) : ' (à vista)'}`,
-        '',
-        'Podem me enviar o link de pagamento no cartão, por favor? 🙏'
-      ];
-      const texto = encodeURIComponent(linhas.join('\n'));
-      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${texto}`, '_blank', 'noopener');
     });
   }
 
@@ -497,45 +531,48 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ============ FORM RSVP -> ENVIO VIA WHATSAPP ============ */
   const rsvpForm = document.getElementById('rsvpForm');
   const rsvpFeedback = document.getElementById('rsvpFeedback');
-  rsvpForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+  if (rsvpForm) {
+    rsvpForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-    const nome = document.getElementById('rsvpName').value.trim();
-    const going = document.getElementById('rsvpGoing').value;
-    const adults = document.getElementById('rsvpAdults').value;
-    const email = document.getElementById('rsvpEmail').value.trim();
-    const msg = document.getElementById('rsvpMsg').value.trim();
+      const nome = document.getElementById('rsvpName').value.trim();
+      const going = document.getElementById('rsvpGoing').value;
+      const adults = document.getElementById('rsvpAdults').value;
+      const email = document.getElementById('rsvpEmail').value.trim();
+      const msg = document.getElementById('rsvpMsg').value.trim();
 
-    const goingText = going === 'sim' ? 'Sim, estarei lá! 🎉' : 'Não poderei ir 😔';
+      const goingText = going === 'sim' ? 'Sim, estarei lá! 🎉' : 'Não poderei ir 😔';
 
-    const linhas = [
-      '💌 *Confirmação de Presença — Alyne & Douglas*',
-      '',
-      `*Nome:* ${nome}`,
-      `*Vai ao evento?* ${goingText}`,
-    ];
-    if (going === 'sim') {
-      linhas.push(`*Nº de adultos (com ele(a)):* ${adults}`);
-    }
-    linhas.push(`*E-mail:* ${email}`);
-    if (msg) {
-      linhas.push(`*Observações:* ${msg}`);
-    }
+      const linhas = [
+        '💌 *Confirmação de Presença — Alyne & Douglas*',
+        '',
+        `*Nome:* ${nome}`,
+        `*Vai ao evento?* ${goingText}`,
+      ];
+      if (going === 'sim') {
+        linhas.push(`*Nº de adultos (com ele(a)):* ${adults}`);
+      }
+      linhas.push(`*E-mail:* ${email}`);
+      if (msg) {
+        linhas.push(`*Observações:* ${msg}`);
+      }
 
-    const texto = encodeURIComponent(linhas.join('\n'));
-    const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${texto}`;
-    window.open(link, '_blank', 'noopener');
+      const texto = encodeURIComponent(linhas.join('\n'));
+      const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${texto}`;
+      window.open(link, '_blank', 'noopener');
 
-    rsvpFeedback.textContent = 'Obrigado! Abrimos o WhatsApp para você enviar sua confirmação. 💛';
-    rsvpForm.reset();
-  });
+      if (rsvpFeedback) {
+        rsvpFeedback.textContent = 'Obrigado! Abrimos o WhatsApp para você enviar sua confirmação. 💛';
+      }
+      rsvpForm.reset();
+    });
+  }
 
   /* ============ MURAL DE RECADOS ============ */
   const recadoForm = document.getElementById('recadoForm');
   const recadosList = document.getElementById('recadosList');
   const RECADOS_KEY = 'wedding_recados';
 
-  // Recados fixos que sempre aparecem (não são apagáveis, editáveis aqui no array)
   const seedRecados = [
     { id: 'seed-1', nome: 'Elisangela Gomes Dias', texto: 'Que o amor sempre se faça presente e a felicidade seja eterna.', fixo: true }
   ];
@@ -560,6 +597,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderRecados() {
+    if (!recadosList) return;
     const saved = loadRecados();
     const all = [...saved, ...seedRecados];
     recadosList.innerHTML = all.map(r => `
@@ -576,26 +614,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderRecados();
 
-  recadoForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const nome = document.getElementById('recadoNome').value.trim();
-    const texto = document.getElementById('recadoTexto').value.trim();
-    if (!nome || !texto) return;
+  if (recadoForm) {
+    recadoForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nomeInput = document.getElementById('recadoNome');
+      const textoInput = document.getElementById('recadoTexto');
+      if (!nomeInput || !textoInput) return;
 
-    const saved = loadRecados();
-    saved.unshift({ id: `r-${Date.now()}`, nome, texto });
-    saveRecados(saved);
-    renderRecados();
-    recadoForm.reset();
-  });
+      const nome = nomeInput.value.trim();
+      const texto = textoInput.value.trim();
+      if (!nome || !texto) return;
 
-  recadosList.addEventListener('click', (e) => {
-    const btn = e.target.closest('.recado-delete');
-    if (!btn) return;
-    const id = btn.getAttribute('data-id');
-    const saved = loadRecados().filter(r => r.id !== id);
-    saveRecados(saved);
-    renderRecados();
-  });
+      const saved = loadRecados();
+      saved.unshift({ id: `r-${Date.now()}`, nome, texto });
+      saveRecados(saved);
+      renderRecados();
+      recadoForm.reset();
+    });
+  }
+
+  if (recadosList) {
+    recadosList.addEventListener('click', (e) => {
+      const btn = e.target.closest('.recado-delete');
+      if (!btn) return;
+      const id = btn.getAttribute('data-id');
+      const saved = loadRecados().filter(r => r.id !== id);
+      saveRecados(saved);
+      renderRecados();
+    });
+  }
 
 });

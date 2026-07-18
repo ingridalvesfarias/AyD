@@ -1,0 +1,5 @@
+.vercel
+.env*
+.api
+.checkout.js
+.webhook.js

@@ -1,10 +1,20 @@
-﻿{
-  "name": "ayd-wedding-site",
+{
+  "name": "alyne-douglas-casamento",
   "version": "1.0.0",
-  "private": true,
-  "description": "Site de casamento de Alyne & Douglas, com integração de pagamentos via Checkout da InfinitePay (Vercel Functions).",
-  "type": "module",
-  "engines": {
-    "node": ">=18.x"
+  "description": "Site de casamento de Alyne e Douglas com lista de presentes e checkout integrado InfinitePay",
+  "main": "api/checkout.js",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "casamento",
+    "infinitepay",
+    "vercel-functions",
+    "checkout"
+  ],
+  "author": "INDI.dev",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5"
   }
 }
