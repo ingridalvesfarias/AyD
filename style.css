@@ -1004,6 +1004,7 @@ body.dark-theme .theme-toggle-btn:hover {
 .gift-image {
   width: 100%;
   aspect-ratio: 1;
+  min-height: 120px;
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid var(--card-border);
