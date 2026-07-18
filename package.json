@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "name": "alyne-douglas-casamento",
   "version": "1.0.0",
@@ -17,15 +16,5 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5"
-=======
-﻿{
-  "name": "ayd-wedding-site",
-  "version": "1.0.0",
-  "private": true,
-  "description": "Site de casamento de Alyne & Douglas, com integração de pagamentos via Checkout da InfinitePay (Vercel Functions).",
-  "type": "module",
-  "engines": {
-    "node": ">=18.x"
->>>>>>> 1bfdff6263cbf7b73d5b943589e0024e0fcf8ec4
   }
 }

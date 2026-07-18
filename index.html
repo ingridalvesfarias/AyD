@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -436,53 +437,52 @@
         <span>Total</span>
         <span id="cartTotalValue">R$ 0,00</span>
       </div>
-      <button class="btn btn--gold" type="button" id="goToCheckoutBtn">Finalizar Presente (InfinitePay)</button>
+      <button class="btn btn--gold" type="button" id="goToCheckoutBtn">Finalizar Presente</button>
     </div>
   </div>
 
-  <!-- ===== MODAL: CHECKOUT OPCIONAL (PIX / CARTÃO) ===== -->
+  <!-- ===== MODAL: FORMAS DE PAGAMENTO ===== -->
   <div class="modal-overlay" id="checkoutModalOverlay">
     <div class="modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
       <button class="modal-close" type="button" aria-label="Fechar">&times;</button>
       <h3 id="checkoutModalTitle">Finalizar Presente</h3>
       <p class="checkout-total">Valor total: <strong id="checkoutTotalValue">R$ 0,00</strong></p>
 
-      <button class="btn btn--gold" type="button" id="startInfiniteCheckoutBtn" style="margin-bottom: 1rem; width: 100%;">Pagar via InfinitePay (Pix / Cartão)</button>
-
-      <div class="payment-methods">
-        <button class="payment-method-btn active" type="button" id="btnPagPix">Chave Pix Direta</button>
-        <button class="payment-method-btn" type="button" id="btnPagCartao">Simular Cartão</button>
-      </div>
-
-      <div class="payment-panel" id="panelPix">
-        <p>Copie a chave Pix abaixo e envie o valor de <strong id="pixTotalValue">R$ 0,00</strong>:</p>
-        <div class="pix-key-box">
-          <div class="pix-key-info">
-            <span class="pix-key-label">Chave Pix (CPF)</span>
-            <span class="pix-key-value" id="pixKeyText">chave-pix</span>
-          </div>
-          <button class="btn-copy-pix" type="button" id="copyPixBtn">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <rect x="9" y="9" width="13" height="13" rx="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
-            <span>Copiar</span>
-          </button>
+      <div class="payment-options-container" style="display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1rem;">
+        
+        <!-- OPÇÃO 1: CHECKOUT ONLINE INFINITEPAY -->
+        <div class="payment-option-card" style="border: 1px solid var(--line); border-radius: 12px; padding: 1.2rem; background: var(--card-bg); text-align: center;">
+          <h4 style="margin-bottom: 0.4rem; color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 1.3rem;">💳 Pagar via InfinitePay</h4>
+          <p style="font-size: 0.88rem; margin-bottom: 1rem; color: var(--text-muted);">Checkout online seguro via <strong>Cartão de Crédito</strong> ou <strong>Pix</strong>.</p>
+          <button class="btn btn--gold" type="button" id="startInfiniteCheckoutBtn" style="width: 100%;">Pagar com InfinitePay</button>
         </div>
+
+        <!-- OPÇÃO 2: CHAVE PIX DIRETA + WHATSAPP -->
+        <div class="payment-option-card" style="border: 1px solid var(--line); border-radius: 12px; padding: 1.2rem; background: var(--card-bg);">
+          <h4 style="margin-bottom: 0.4rem; color: var(--gold); font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; text-align: center;">🔑 Chave Pix Direta</h4>
+          <p style="font-size: 0.88rem; margin-bottom: 0.8rem; color: var(--text-muted); text-align: center;">Copie a chave Pix abaixo e envie o valor de <strong id="pixTotalValue">R$ 0,00</strong> pelo seu banco:</p>
+          
+          <div class="pix-key-box" style="margin-bottom: 1rem;">
+            <div class="pix-key-info">
+              <span class="pix-key-label">Chave Pix (CPF)</span>
+              <span class="pix-key-value" id="pixKeyText">08064082358</span>
+            </div>
+            <button class="btn-copy-pix" type="button" id="copyPixBtn">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>Copiar</span>
+            </button>
+          </div>
+
+          <button class="btn btn--outline" type="button" id="sendPixWhats" style="width: 100%;">Enviar comprovante pelo WhatsApp</button>
+        </div>
+
       </div>
 
-      <div class="payment-panel" id="panelCartao" style="display:none;">
-        <label for="parcelasSelect">Em quantas vezes deseja parcelar?</label>
-        <select id="parcelasSelect">
-          <option value="1">1x sem juros</option>
-          <option value="2">2x sem juros</option>
-          <option value="3">3x sem juros</option>
-        </select>
-        <p class="parcela-preview" id="parcelaPreview"></p>
-      </div>
-
-      <p class="checkout-note">O valor arrecadado vai diretamente para a conta dos noivos. 💛</p>
+      <p class="checkout-note" style="margin-top: 1.2rem; text-align: center; font-size: 0.85rem; opacity: 0.8;">Toda a quantia arrecadada vai diretamente para a conta dos noivos. 💛</p>
     </div>
   </div>
 

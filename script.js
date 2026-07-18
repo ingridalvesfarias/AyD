@@ -1,11 +1,11 @@
 /* ============================================================
-                   CONFIGURAÇÕES — EDITE AQUI
+                  CONFIGURAÇÕES — EDITE AQUI
    ============================================================ */
 // Número de WhatsApp que vai receber as confirmações de presença e recados.
 // Formato: código do país (55) + DDD + número, SOMENTE dígitos.
 const WHATSAPP_NUMBER = '5585999026005';
 
-// Chave Pix que será exibida como alternativa no modal (se necessário).
+// Chave Pix que será exibida como alternativa no modal.
 const PIX_KEY = '08064082358';
 const PIX_NAME = 'Alyne Pilger';
 
@@ -389,10 +389,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ============================================================
-     FLUXO DE CHECKOUT INTEGRADO VIA INFINITEPAY
+     MODAL DE FORMAS DE PAGAMENTO (INFINITEPAY + CHAVE PIX)
      ============================================================ */
   const goToCheckoutBtn = document.getElementById('goToCheckoutBtn');
+  const checkoutModalOverlay = document.getElementById('checkoutModalOverlay');
+  const checkoutTotalValue = document.getElementById('checkoutTotalValue');
+  const pixTotalValue = document.getElementById('pixTotalValue');
+  const pixKeyText = document.getElementById('pixKeyText');
+  const copyPixBtn = document.getElementById('copyPixBtn');
   const startInfiniteCheckoutBtn = document.getElementById('startInfiniteCheckoutBtn');
+  const sendPixWhats = document.getElementById('sendPixWhats');
+
+  if (pixKeyText) pixKeyText.textContent = PIX_KEY;
+
+  function buildCartSummaryLines(cart) {
+    return cart.map(i => `• ${i.title} (x${i.qty}) — ${formatBRL(i.value * i.qty)}`);
+  }
+
+  // Ao clicar em "Finalizar Presente" no carrinho, abre o modal de seleção de pagamento
+  if (goToCheckoutBtn) {
+    goToCheckoutBtn.addEventListener('click', () => {
+      const cart = loadCart();
+      if (cart.length === 0) return;
+      const total = cartTotal(cart);
+      if (checkoutTotalValue) checkoutTotalValue.textContent = formatBRL(total);
+      if (pixTotalValue) pixTotalValue.textContent = formatBRL(total);
+      closeModal(cartModalOverlay);
+      openModal(checkoutModalOverlay);
+    });
+  }
 
   /**
    * Envia o carrinho para a Serverless Function /api/checkout
@@ -405,8 +430,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    const btn = triggerBtn || goToCheckoutBtn;
-    const originalText = btn ? btn.textContent : 'Finalizar Presente';
+    const btn = triggerBtn || startInfiniteCheckoutBtn;
+    const originalText = btn ? btn.textContent : 'Pagar com InfinitePay';
 
     if (btn) {
       btn.disabled = true;
@@ -442,14 +467,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Ao clicar em "Finalizar Presente" no carrinho, dispara a integração com InfinitePay
-  if (goToCheckoutBtn) {
-    goToCheckoutBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      executeInfiniteCheckout(goToCheckoutBtn);
-    });
-  }
-
   if (startInfiniteCheckoutBtn) {
     startInfiniteCheckoutBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -457,55 +474,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ============================================================
-     MODAL DE SUPORTE A CHAVE PIX DIRETA (OPCIONAL)
-     ============================================================ */
-  const checkoutModalOverlay = document.getElementById('checkoutModalOverlay');
-  const checkoutTotalValue = document.getElementById('checkoutTotalValue');
-  const pixTotalValue = document.getElementById('pixTotalValue');
-  const pixKeyText = document.getElementById('pixKeyText');
-  const copyPixBtn = document.getElementById('copyPixBtn');
-  const btnPagPix = document.getElementById('btnPagPix');
-  const btnPagCartao = document.getElementById('btnPagCartao');
-  const panelPix = document.getElementById('panelPix');
-  const panelCartao = document.getElementById('panelCartao');
-  const parcelasSelect = document.getElementById('parcelasSelect');
-  const parcelaPreview = document.getElementById('parcelaPreview');
-
-  if (pixKeyText) pixKeyText.textContent = PIX_KEY;
-
-  function updateParcelaPreview() {
-    if (!parcelasSelect || !parcelaPreview) return;
-    const cart = loadCart();
-    const total = cartTotal(cart);
-    const n = parseInt(parcelasSelect.value, 10);
-    if (n <= 1) {
-      parcelaPreview.textContent = `À vista: ${formatBRL(total)}`;
-    } else {
-      parcelaPreview.textContent = `${n}x de ${formatBRL(total / n)} sem juros`;
-    }
-  }
-
-  if (btnPagPix && btnPagCartao) {
-    btnPagPix.addEventListener('click', () => {
-      btnPagPix.classList.add('active');
-      btnPagCartao.classList.remove('active');
-      if (panelPix) panelPix.style.display = '';
-      if (panelCartao) panelCartao.style.display = 'none';
-    });
-    btnPagCartao.addEventListener('click', () => {
-      btnPagCartao.classList.add('active');
-      btnPagPix.classList.remove('active');
-      if (panelCartao) panelCartao.style.display = '';
-      if (panelPix) panelPix.style.display = 'none';
-      updateParcelaPreview();
-    });
-  }
-
-  if (parcelasSelect) {
-    parcelasSelect.addEventListener('change', updateParcelaPreview);
-  }
-
+  // Copiar Chave Pix
   if (copyPixBtn) {
     const copyPixLabel = copyPixBtn.querySelector('span');
     copyPixBtn.addEventListener('click', async () => {
@@ -523,6 +492,26 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch {
         window.prompt('Copie a chave Pix abaixo:', PIX_KEY);
       }
+    });
+  }
+
+  // Enviar comprovante Pix via WhatsApp
+  if (sendPixWhats) {
+    sendPixWhats.addEventListener('click', () => {
+      const cart = loadCart();
+      if (cart.length === 0) return;
+      const linhas = [
+        '🎁 *Presente via Pix Direto — Alyne & Douglas*',
+        '',
+        ...buildCartSummaryLines(cart),
+        '',
+        `*Total:* ${formatBRL(cartTotal(cart))}`,
+        `*Chave Pix usada:* ${PIX_KEY}`,
+        '',
+        'Já fiz o Pix, segue o comprovante! 💛'
+      ];
+      const texto = encodeURIComponent(linhas.join('\n'));
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${texto}`, '_blank', 'noopener');
     });
   }
 
