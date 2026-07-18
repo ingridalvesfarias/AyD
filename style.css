@@ -42,8 +42,8 @@ body.dark-theme {
   --line: #383129;
   --text-muted: #a49987;
 
-  --card-bg: #1e1a16;
-  --card-border: #44392b;
+  --card-bg: #181512;
+  --card-border: #383129;
   --input-bg: #121211;
   --placeholder-start: #1b1815;
   --placeholder-end: #0f0d0b;
@@ -981,45 +981,57 @@ body.dark-theme .theme-toggle-btn:hover {
   gap: 24px;
   opacity: 1;
   visibility: visible;
+  /* Garante que todos os cards da mesma fileira tenham a mesma altura,
+     independentemente do tamanho do título ou se o presente tem preço
+     parcelado ou não. */
+  align-items: stretch;
 }
 
 .gift-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  padding: 28px 20px 24px;
+  padding: 32px 24px;
   text-align: center;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  border-radius: 6px;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.15), box-shadow 0.4s ease, border-color 0.4s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.01);
   opacity: 1;
   visibility: visible;
+  /* Cards viram coluna flexível: mesmo com títulos de tamanhos diferentes
+     (2 ou 3 linhas) e nem todo item tendo preço parcelado, o botão
+     "Presentear" sempre fica alinhado na base do card, e todos os cards
+     da mesma fileira ficam com a mesma altura (sem ficar "torto"). */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .gift-card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 15px 30px rgba(184, 147, 90, 0.15);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(184, 147, 90, 0.12);
   border-color: var(--gold);
 }
 
 .gift-image {
-  position: relative;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1;
+  min-height: 120px;
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid var(--card-border);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   background: var(--placeholder-start);
+  flex-shrink: 0;
+}
+
+/* Empurra o botão "Presentear" para a base do card, alinhando-o com os
+   demais cards da mesma fileira mesmo quando o título ou o preço ocupam
+   alturas diferentes. */
+.gift-card .btn-presentear {
+  margin-top: auto;
 }
 
 .gift-image img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1037,39 +1049,24 @@ body.dark-theme .theme-toggle-btn:hover {
   line-height: 1.3;
   margin: 0 0 10px;
   color: var(--ink);
-  min-height: 46px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 48px;
+  min-height: 48px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .gift-price {
   font-family: var(--font-utility);
-  margin: 0 0 16px;
+  margin: 0 0 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
-}
-
-.gift-card .btn-presentear {
-  margin-top: auto;
-  width: 100%;
-  background: var(--gold);
-  color: #ffffff;
-  border: 1px solid var(--gold);
-  font-weight: 600;
-  border-radius: 6px;
-  padding: 11px 16px;
-  letter-spacing: 1px;
-  transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-}
-
-.gift-card .btn-presentear:hover {
-  background: var(--wine);
-  border-color: var(--wine);
-  color: #ffffff;
+  min-height: 44px;
 }
 
 .gift-single-price {
@@ -1259,7 +1256,6 @@ textarea:focus {
 
   .godparents-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px 16px;
   }
 
   .venue-card {
@@ -1278,25 +1274,10 @@ textarea:focus {
   .gift-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
-    opacity: 1 !important;
-    visibility: visible !important;
-  }
-
-  .gift-card {
-    opacity: 1 !important;
-    visibility: visible !important;
   }
 
   .form-row--split {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  input,
-  select,
-  textarea {
-    font-size: 16px !important;
   }
 }
 
@@ -1305,12 +1286,7 @@ textarea:focus {
     padding: 0 14px;
   }
 
-  .section {
-    padding: 60px 0;
-  }
-
   .gift-grid {
-    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
     margin-top: 28px;
   }
@@ -1318,40 +1294,30 @@ textarea:focus {
   .gift-card {
     padding: 12px 10px 14px;
     border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
   }
 
   .gift-image {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     border-radius: 6px;
+    min-height: 0;
   }
 
   .gift-card h4 {
     font-size: 13.5px;
+    height: 36px;
     min-height: 36px;
     line-height: 1.25;
     margin: 0 0 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .gift-price {
-    margin: 0 0 10px;
+    margin: 0 0 8px;
     min-height: 32px;
-  }
-
-  .gift-single-price {
-    font-size: 13.5px;
-  }
-
-  .gift-installments {
-    font-size: 13px;
-  }
-
-  .gift-full-price {
-    font-size: 10px;
   }
 
   .gift-card .btn-presentear {
@@ -1363,43 +1329,7 @@ textarea:focus {
 }
 
 @media (max-width: 480px) {
-  .hero {
-    padding: 90px 14px 40px;
-  }
-
-  .hero-frame {
-    inset: 10px;
-  }
-
-  .hero-names {
-    font-size: clamp(36px, 11vw, 52px);
-  }
-
-  .countdown-container {
-    gap: 6px;
-    margin-top: 24px;
-  }
-
-  .countdown-circle {
-    width: 70px;
-    height: 70px;
-  }
-
-  .countdown-circle::before {
-    inset: 3px;
-  }
-
-  .countdown-val {
-    font-size: 19px;
-  }
-
-  .countdown-lbl {
-    font-size: 7.5px;
-    letter-spacing: 0.4px;
-  }
-
   .gift-grid {
-    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
 
@@ -1409,9 +1339,15 @@ textarea:focus {
 
   .gift-card h4 {
     font-size: 12.5px;
+    height: 34px;
     min-height: 34px;
     line-height: 1.22;
     margin: 0 0 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .gift-price {
@@ -1438,24 +1374,10 @@ textarea:focus {
     border-radius: 4px;
   }
 
-  .godparents-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .godparent-photo {
-    width: 90px;
-    height: 90px;
-  }
-
-  .godparent-card {
-    padding: 14px 8px;
-  }
-
   .beauty-card {
     flex-direction: column;
     text-align: center;
-    padding: 18px 12px;
+    padding: 20px 16px;
   }
 }
 
@@ -1935,19 +1857,16 @@ body.modal-open {
     top: 0;
     right: 0;
     height: 100vh;
-    width: min(82vw, 320px);
-    background: var(--header-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    width: min(78vw, 320px);
+    background: var(--ivory);
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 24px;
-    padding: 40px 32px;
+    gap: 26px;
+    padding: 40px;
     transform: translateX(100%);
     transition: transform var(--transition);
-    box-shadow: -10px 0 35px rgba(0, 0, 0, 0.25);
-    border-left: 1px solid var(--line);
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.08);
   }
 
   .main-nav.open {
