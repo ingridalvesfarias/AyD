@@ -1238,6 +1238,7 @@ textarea:focus {
 
   .gift-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
 
   .form-row--split {
@@ -1245,7 +1246,40 @@ textarea:focus {
   }
 }
 
+@media (max-width: 600px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .gift-grid {
+    gap: 12px;
+    margin-top: 36px;
+  }
+
+  .gift-card {
+    padding: 16px 10px;
+  }
+
+  .gift-card h4 {
+    font-size: 14.5px;
+    min-height: 44px;
+  }
+}
+
 @media (max-width: 480px) {
+  .gift-grid {
+    gap: 10px;
+  }
+
+  .gift-card {
+    padding: 14px 8px;
+  }
+
+  .gift-card h4 {
+    font-size: 13.5px;
+    min-height: 38px;
+  }
+
   .beauty-card {
     flex-direction: column;
     text-align: center;

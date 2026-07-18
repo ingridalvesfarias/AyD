@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
   revealEls.forEach(el => revealObserver.observe(el));
 
   /* ============ CONTAGEM REGRESSIVA EM TEMPO REAL ============ */
