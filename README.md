@@ -1,263 +1,66 @@
-<<<<<<< HEAD
-# Site de Casamento de Alyne & Douglas 💍
+# 💍 Alyne & Douglas | Site de Casamento
 
-Este repositório contém o site oficial do casamento de **Alyne & Douglas** (12 de Setembro de 2026), equipado com confirmação de presença (RSVP), mural de recados e uma **lista de presentes simbólica integrada ao Checkout da InfinitePay**.
+Site de casamento elegante, moderno e responsivo para Alyne & Douglas, desenvolvido para apresentar a história do casal, confirmar presença (RSVP), exibir mural de recados e oferecer uma lista de presentes simbólica com checkout integrado via InfinitePay e Pix.
 
----
+## 🚀 Sobre o Projeto
+
+Este projeto foi criado como um site de casamento interativo de alta performance. O foco principal é a experiência do usuário, oferecendo uma navegação fluida para os convidados, contagem regressiva em tempo real, confirmação de presença via WhatsApp e arrecadação de presentes em dinheiro direto na conta dos noivos.
+
+### Destaques da Página:
+
+- **Design Responsivo & Elegante**: Adaptado para mobile, tablet e desktop com suporte a alternância de temas (Dark/Light Mode).
+- **Navegação Suave**: Menu otimizado com Scroll Spy para navegação contínua entre as seções da mesma página.
+- **Seções Completas**:
+  - **Hero**: Apresentação dos noivos com contagem regressiva em tempo real até o grande dia (12 de Setembro de 2026).
+  - **O Casal**: História dos noivos, versículo inspirador e guia de dress code (looks femininos, masculinos e o que evitar).
+  - **Padrinhos**: Grid interativo com os padrinhos e madrinhas do casamento.
+  - **Recepção**: Localização completa do evento no Buffet Ana Conceito (com mapa interativo) e indicações de espaços de beleza parceiros.
+  - **Lista de Presentes Simbólica**: Carrinho interativo com cálculo automático do valor total, integração com o **Checkout da InfinitePay** (Pix e Cartão de Crédito) e opção de **Chave Pix Direta com WhatsApp**.
+  - **Confirmação de Presença (RSVP)**: Formulário interativo com envio da confirmação direto para o WhatsApp dos noivos.
+  - **Mural de Recados**: Mural de carinho com salvamento local no navegador.
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Front-end**: HTML5, CSS3 Vanilla (Design responsivo e Dark/Light Mode), JavaScript ES6+.
-- **Back-end**: Vercel Serverless Functions (Node.js).
-- **Processador de Pagamento**: [InfinitePay Checkout API](https://www.infinitepay.io/checkout).
-- **Hospedagem**: Vercel.
+- **HTML5**: Semântica estruturada e acessível.
+- **CSS3**: Estilização visual personalizada, layout responsivo (Flexbox/Grid), variáveis CSS e temas claro e escuro.
+- **JavaScript (Vanilla ES6+)**: Interatividade do carrinho de presentes, modais, contagem regressiva em tempo real e mural de recados.
+- **Node.js & Vercel Serverless Functions**: Back-end hospedado na Vercel em `/api/checkout.js` e `/api/webhook.js` para comunicação com a API da InfinitePay.
+- **InfinitePay API**: Processamento online de pagamentos em tempo real via Pix e Cartão de Crédito.
 
----
+## 📋 Como Executar
 
-## 💡 Como Funciona o Checkout de Presentes
+Este é um projeto híbrido (estático + Vercel Serverless Functions).
 
-1. **Seleção de Presentes**: O convidado escolhe um ou mais presentes na lista e adiciona ao carrinho.
-2. **Cálculo de Total**: O carrinho calcula automaticamente o valor total dos presentes em R$.
-3. **Chamada Serverless (`/api/checkout`)**: Ao clicar em *"Finalizar Presente"*, o JavaScript envia a lista de itens para a Serverless Function hospedada na Vercel.
-4. **Integração InfinitePay**: A APIServerless faz uma chamada HTTPS para `https://api.checkout.infinitepay.io/links` com a InfiniteTag dos noivos (`labellaesteticaebeleza`) e converte os valores para centavos.
-5. **Redirecionamento**: A API devolve a URL única do checkout e o front-end redireciona o convidado para a tela segura da InfinitePay.
-6. **Pagamento Direto**: O convidado realiza o pagamento via Pix ou Cartão de Crédito e o valor cai diretamente na conta dos noivos.
+### Teste Local
 
-> ℹ️ **Importante**: A lista de presentes é **100% simbólica**. Não há controle de estoque, banco de dados ou bloqueio de itens. Múltiplos convidados podem presentear o mesmo item quantas vezes quiserem.
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/ingridalvesfarias/AyD.git
+   cd AyD
+   ```
 
----
-
-## 📁 Estrutura de Arquivos
-
-```text
-/
-├── api/
-│   ├── checkout.js    # Vercel Function: Gera link de pagamento InfinitePay
-│   └── webhook.js     # Vercel Function: Recebe notificações de status da transação
-├── assets/            # Imagens dos noivos, padrinhos e recursos estáticos
-├── img/               # Imagens ilustrativas dos presentes da lista
-├── .env.example       # Exemplo de variáveis de ambiente
-├── index.html         # Estrutura HTML5 da aplicação
-├── package.json       # Dependências e scripts de desenvolvimento
-├── README.md          # Documentação do projeto
-├── script.js          # Lógica principal front-end e comunicação com a API
-└── style.css          # Estilização visual completa (Tema claro e escuro)
-```
-
----
-
-## ⚙️ Variáveis de Ambiente
-
-Crie um arquivo `.env` na raiz do projeto (ou configure no painel da Vercel) com base no `.env.example`:
-
-```env
-# InfiniteTag cadastrada no App da InfinitePay (sem o símbolo $)
-INFINITE_TAG=labellaesteticaebeleza
-
-# URL base da sua aplicação publicada na Vercel
-APP_URL=https://seu-site.vercel.app
-```
-
----
-
-## 🚀 Como Rodar o Projeto Localmente
-
-### Pré-requisitos
-- Node.js versão 18 ou superior instalada.
-- CLI da Vercel (`npm i -g vercel`).
-
-### Passo a Passo
-
-1. Instale as dependências:
+2. Instale as dependências:
    ```bash
    npm install
    ```
 
-2. Execute o ambiente local da Vercel:
+3. Execute o ambiente de desenvolvimento da Vercel:
    ```bash
-   vercel dev
+   npx vercel dev
    ```
 
-3. Acesse no seu navegador a URL exibida no terminal (geralmente `http://localhost:3000`).
+4. Abra `http://localhost:3000` no seu navegador.
 
----
+### Hospedagem na Vercel
 
-## 🌐 Implantação (Deploy na Vercel)
-
-1. Faça o push do código para o seu repositório Git (GitHub / GitLab / Bitbucket).
-2. Importe o projeto no dashboard da **Vercel**.
-3. Em **Environment Variables**, adicione:
+Para hospedar o projeto gratuitamente na Vercel:
+1. Conecte este repositório à sua conta na Vercel.
+2. Configure a variável de ambiente:
    - `INFINITE_TAG` = `labellaesteticaebeleza`
-   - `APP_URL` = `https://seu-dominio-customizado.com.br` (ou a URL gerada pela Vercel).
-4. Clique em **Deploy**. A Vercel detectará automaticamente as funções em `/api/*.js` e disponibilizará a aplicação pronta para produção.
-=======
-# Site de Casamento — Alyne & Douglas
+3. O deploy será realizado automaticamente e as Serverless Functions estarão prontas para produção.
 
-Site estático (HTML, CSS e JavaScript puro) com integração de pagamentos via
-**Checkout da InfinitePay**, rodando como **Vercel Functions** (sem Express e
-sem servidor externo).
+## 🤝 Contribuição
 
-## O que foi alterado
+Este template foi criado com carinho para celebrar a união de Alyne & Douglas. Sinta-se à vontade para expandir as funcionalidades, personalizar os estilos CSS ou adaptar para outros eventos.
 
-O site em si (design, seções, contagem regressiva, RSVP, mural de recados,
-carrinho de presentes etc.) **não foi modificado**. A única mudança de
-funcionamento foi no botão final de pagamento:
-
-- **Antes:** ao finalizar o carrinho, o site abria o WhatsApp dos noivos
-  pedindo o comprovante do Pix ou solicitando um link de pagamento no cartão.
-- **Agora:** ao finalizar o carrinho, o site chama a API interna
-  `/api/checkout`, que cria um Checkout na InfinitePay e devolve uma URL de
-  pagamento. O convidado é redirecionado para essa URL e paga com **Pix ou
-  Cartão** diretamente no ambiente seguro da InfinitePay. O dinheiro cai
-  direto na conta dos noivos.
-
-### Regra de negócio mantida
-
-A lista de presentes continua **puramente simbólica**:
-
-- Os presentes **não** desaparecem, **não** são marcados como vendidos e
-  **não** ficam indisponíveis.
-- Não há estoque, banco de dados ou qualquer lógica de bloqueio.
-- Se 50 pessoas presentearem a mesma Air Fryer, todas as 50 compras são
-  processadas normalmente — o site apenas gera um Checkout novo a cada clique.
-
-## Estrutura do projeto
-
-```
-/api
-  checkout.js     → cria o Checkout na InfinitePay a partir do carrinho
-  webhook.js       → recebe a confirmação automática de pagamento
-index.html
-script.js
-style.css
-package.json
-.env.example
-README.md
-```
-
-## Como funciona o fluxo de pagamento
-
-1. O convidado escolhe um ou vários presentes; o carrinho (guardado no
-   `localStorage`, como já era) soma o valor total.
-2. Ao clicar em **"Finalizar Presente"**, o `script.js` chama:
-   ```js
-   const resposta = await fetch('/api/checkout', {
-     method: 'POST',
-     headers: { 'Content-Type': 'application/json' },
-     body: JSON.stringify({ items, total, description })
-   });
-   const dados = await resposta.json();
-   ```
-3. `/api/checkout.js`:
-   - Valida os itens, valores, quantidades e o total recebido.
-   - Converte os valores de reais para **centavos** (exigência da InfinitePay).
-   - Faz uma requisição `POST` para
-     `https://api.checkout.infinitepay.io/links` com o `handle` (InfiniteTag)
-     do casal e os itens do pedido.
-   - Devolve `{ url, order_nsu }` para o frontend.
-4. O frontend redireciona o navegador:
-   ```js
-   window.location = dados.url;
-   ```
-5. O convidado paga com Pix ou Cartão na página da InfinitePay e, ao concluir,
-   pode retornar ao site pela `redirect_url` configurada.
-6. Quando o pagamento é confirmado, a InfinitePay envia uma notificação
-   `POST` para `/api/webhook.js`, que apenas registra o evento nos logs da
-   Vercel (não há banco de dados nem alteração de disponibilidade de
-   presentes).
-
-## Auditoria contra a documentação oficial
-
-A integração foi conferida campo a campo contra a documentação oficial da
-InfinitePay, em três fontes independentes (todas com o mesmo exemplo de
-request/response):
-
-- Documentação interativa: <https://www.infinitepay.io/checkout-documentacao>
-- Página do produto: <https://www.infinitepay.io/checkout>
-- Central de Ajuda: <https://ajuda.infinitepay.io/pt-BR/articles/10766888-como-usar-o-checkout-da-infinitepay>
-
-| Item                                   | Documentação oficial                                                              | Implementado em `api/checkout.js` / `api/webhook.js` |
-| --------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| Endpoint de criação do link              | `POST https://api.checkout.infinitepay.io/links`                                    | ✅ idêntico                                             |
-| Campo `handle`                          | Obrigatório, InfiniteTag sem `$`                                                     | ✅ idêntico (via `INFINITEPAY_HANDLE`)                  |
-| Campo `items[].quantity`                | Obrigatório, número                                                                  | ✅ idêntico                                             |
-| Campo `items[].price`                   | Obrigatório, número **em centavos**                                                  | ✅ idêntico (`toCents`)                                 |
-| Campo `items[].description`             | Obrigatório, string                                                                  | ✅ idêntico (sem truncamento artificial)                |
-| Campo `order_nsu`                       | Opcional — se omitido, a InfinitePay gera um valor aleatório                         | ✅ enviado (gerado por nós, para rastreio)              |
-| Campo `redirect_url`                    | Opcional                                                                             | ✅ enviado (com fallback configurável)                  |
-| Campo `webhook_url`                     | Opcional                                                                             | ✅ enviado (com fallback configurável)                  |
-| Campos `customer` / `address`           | Opcionais                                                                            | Não enviados (o site não coleta esses dados)            |
-| Resposta de sucesso                     | `{ "url": "https://checkout.infinitepay.com.br/..." }`                              | ✅ idêntico                                             |
-| Payload do webhook                      | `invoice_slug, amount, paid_amount, installments, capture_method, transaction_nsu, order_nsu, receipt_url, items` | ✅ idêntico (mesmos nomes de campo)                     |
-| Resposta esperada ao webhook (sucesso)  | `200 OK` + `{ "success": true, "message": null }`                                    | ✅ idêntico                                             |
-| Resposta esperada ao webhook (erro)     | `400 Bad Request` + `{ "success": false, "message": "..." }`                         | ✅ idêntico                                             |
-
-Nenhum nome de endpoint ou de campo foi presumido: todos vêm literalmente dos
-exemplos de `curl`/JSON publicados nessas páginas. Endpoints não usados pelo
-site (ex.: `POST /payment_check`, para consulta manual de status) não foram
-implementados por não fazerem parte do fluxo solicitado (o site usa apenas
-webhook para confirmação).
-
-## Configuração
-
-### 1. Obtenha sua InfiniteTag (`handle`)
-
-No App InfinitePay ou no painel web, copie sua InfiniteTag **sem o símbolo
-`$`** no início.
-
-### 2. Configure as variáveis de ambiente
-
-Copie `.env.example` para `.env` (uso local) e/ou cadastre as mesmas
-variáveis no painel da Vercel em
-**Project → Settings → Environment Variables**:
-
-| Variável                     | Obrigatória | Descrição                                                                 |
-| ---------------------------- | ----------- | -------------------------------------------------------------------------- |
-| `INFINITEPAY_HANDLE`         | Sim         | InfiniteTag do casal, sem o `$`.                                           |
-| `SITE_URL`                   | Não         | URL pública do site. Se ausente, é detectada pelo host da requisição.      |
-| `INFINITEPAY_REDIRECT_URL`   | Não         | Para onde o convidado volta após pagar. Padrão: `${SITE_URL}/?pagamento=sucesso`. |
-| `INFINITEPAY_WEBHOOK_URL`    | Não         | URL que recebe a confirmação de pagamento. Padrão: `${SITE_URL}/api/webhook`. |
-
-### 3. Deploy na Vercel
-
-```bash
-# Instale a CLI da Vercel, se ainda não tiver
-npm i -g vercel
-
-# Rode localmente (com Vercel Functions incluídas)
-vercel dev
-
-# Faça o deploy
-vercel --prod
-```
-
-Como o projeto usa apenas HTML/CSS/JS puro + Vercel Functions nativas, não há
-`build step` nem dependências de terceiros a instalar — o `package.json`
-existe apenas para configurar o projeto como módulo ES (`"type": "module"`)
-e o script `dev` de conveniência.
-
-## Testando a integração
-
-1. Rode `vercel dev` na raiz do projeto.
-2. Abra o site, adicione presentes ao carrinho e clique em
-   **"Finalizar Presente"**.
-3. O modal mostrará "Preparando seu checkout seguro..." enquanto a API
-   cria o link, e em seguida redirecionará para a InfinitePay.
-4. Em caso de erro (ex.: `INFINITEPAY_HANDLE` não configurado, falha de
-   rede, etc.), o modal exibe uma mensagem amigável e um botão
-   **"Tentar novamente"**.
-
-## Observações de segurança e boas práticas aplicadas
-
-- **Validação no servidor:** a API nunca confia cegamente no valor total
-  enviado pelo cliente — ela recalcula a soma dos itens e compara com o
-  total recebido antes de criar o checkout.
-- **Sem segredos expostos:** nenhuma chave de API é necessária no frontend;
-  toda a comunicação com a InfinitePay acontece no backend (Vercel Function).
-- **Tratamento de erros:** falhas de rede, respostas inesperadas da
-  InfinitePay e payloads inválidos são tratados e comunicados ao usuário
-  de forma clara, sem quebrar a experiência do site.
-- **Sem duplicação:** a lógica de carrinho (soma, formatação de moeda,
-  `localStorage`) permanece exatamente como estava — apenas o destino final
-  do botão de pagamento foi trocado.
->>>>>>> 1bfdff6263cbf7b73d5b943589e0024e0fcf8ec4
+Desenvolvido por **INDI.dev** (Ingrid Farias) para transformar momentos especiais em experiências digitais inesquecíveis.
