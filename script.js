@@ -106,9 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ============ REVEAL ON SCROLL ============ */
   const revealEls = document.querySelectorAll('.reveal');
-  if (window.innerWidth <= 900) {
-    revealEls.forEach(el => el.classList.add('is-visible'));
-  }
   const revealObserver = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -116,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+  }, { threshold: 0.01, rootMargin: '120px 0px 120px 0px' });
   revealEls.forEach(el => revealObserver.observe(el));
 
   /* ============ CONTAGEM REGRESSIVA EM TEMPO REAL ============ */
