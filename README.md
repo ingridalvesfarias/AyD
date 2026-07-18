@@ -56,7 +56,7 @@ Este é um projeto híbrido (estático + Vercel Serverless Functions).
 Para hospedar o projeto gratuitamente na Vercel:
 1. Conecte este repositório à sua conta na Vercel.
 2. Configure a variável de ambiente:
-   - `INFINITE_TAG` = `labellaesteticaebeleza`
+   - `INFINITE_TAG` = `******************`
 3. O deploy será realizado automaticamente e as Serverless Functions estarão prontas para produção.
 
 ## 🤝 Contribuição
